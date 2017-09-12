@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -73,5 +74,11 @@ public class WebModule {
             return retrofit;
         }
 
+
+        @Provides
+        @Singleton
+        FirebaseAuth provideFirebase() {
+            return  FirebaseAuth.getInstance();
+        }
 
 }

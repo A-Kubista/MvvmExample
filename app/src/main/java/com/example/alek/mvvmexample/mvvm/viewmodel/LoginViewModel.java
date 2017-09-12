@@ -1,16 +1,19 @@
 package com.example.alek.mvvmexample.mvvm.viewmodel;
 
+import android.app.Activity;
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.alek.mvvmexample.App;
 import com.example.alek.mvvmexample.R;
@@ -22,6 +25,9 @@ import com.example.alek.mvvmexample.mvvm.model.UserModel;
 import com.example.alek.mvvmexample.mvvm.model.repository.TutorialRepository;
 import com.example.alek.mvvmexample.mvvm.model.repository.UserRepository;
 import com.example.alek.mvvmexample.mvvm.view.ui.LoginActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -29,6 +35,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.concurrent.Executor;
 
 import javax.inject.Inject;
 
@@ -106,7 +114,7 @@ public class LoginViewModel extends ViewModel{
 
     }
 
-    public void attemptLogin(AutoCompleteTextView mEmailView, EditText mPasswordView) {
+    public boolean validateLogin(AutoCompleteTextView mEmailView, EditText mPasswordView) {
 
         // Reset errors.
         mEmailView.setError(null);
@@ -137,25 +145,11 @@ public class LoginViewModel extends ViewModel{
 
         if (cancel) {
             focusView.requestFocus();
-        } else {
-            login();
         }
+
+        return !cancel;
     }
 
-    private void login() {
-        mAuth = FirebaseAuth.getInstance();
-        mAuthListener = firebaseAuth -> {
-            FirebaseUser user = firebaseAuth.getCurrentUser();
-            if (user != null) {
-                // UserModel is signed in
-                login_status.setValue(true);
-                Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
-            } else {
-                // UserModel is signed out
-                Log.d(TAG, "onAuthStateChanged:signed_out");
-                login_status.setValue(false);
-            }
-        };
-    }
+
 
 }

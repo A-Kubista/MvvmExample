@@ -20,11 +20,13 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +37,11 @@ import com.example.alek.mvvmexample.mvvm.model.repository.UserRepository;
 import com.example.alek.mvvmexample.mvvm.view.customviews.LifecycleAppCompatActivity;
 import com.example.alek.mvvmexample.mvvm.viewmodel.LoginViewModel;
 import com.example.alek.mvvmexample.mvvm.viewmodel.TutorialViewModel;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import javax.inject.Inject;
 
@@ -42,8 +49,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static android.Manifest.permission.READ_CONTACTS;
-
-
+import static android.content.ContentValues.TAG;
 
 
 /**
@@ -70,8 +76,8 @@ public class LoginActivity extends LifecycleAppCompatActivity implements LoaderC
 
     @Inject
     ViewModelProvider.Factory viewModelFactory;
-
-    private UserLoginTask mAuthTask = null;
+    @Inject
+    public FirebaseAuth mAuth;
 
     // UI references.
     @BindView(R.id.email) AutoCompleteTextView mEmailView;
@@ -79,6 +85,7 @@ public class LoginActivity extends LifecycleAppCompatActivity implements LoaderC
     @BindView(R.id.login_progress) View mProgressView;
     @BindView(R.id.email_sign_in_button) View mEmailSignInButton;
     @BindView(R.id.login_form) View mLoginFormView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -157,7 +164,45 @@ public class LoginActivity extends LifecycleAppCompatActivity implements LoaderC
 
 
     private void attemptLogin() {
-        viewModel.attemptLogin(mEmailView,mPasswordView);
+        Intent intent = new Intent(this,TutorialScrollingActivity.class);
+        String email= mEmailView.getText().toString();
+        String password = mPasswordView.getText().toString();
+        if(viewModel.validateLogin(mEmailView,mPasswordView)){
+            // login
+            mAuth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener( this, (OnCompleteListener<AuthResult>) task -> {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            startActivity(intent);
+                            Log.d(TAG, "signInWithEmail:success");
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            createUser(intent,email,password);
+                            Log.w(TAG, "signInWithEmail:failure", task.getException());
+                        }
+                    });
+        }else{
+
+        }
+    }
+
+    public void createUser(Intent intent,String email, String password){
+        // create account and login
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, task -> {
+                    if (task.isSuccessful()) {
+                        startActivity(intent);
+                        // Sign in success, update UI with the signed-in user's information
+                        Log.d(TAG, "createUserWithEmail:success");
+                        FirebaseUser user = mAuth.getCurrentUser();
+                    } else {
+                        // If sign in fails, display a message to the user.
+                        Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                        Toast.makeText(LoginActivity.this, "Authentication failed.",
+                                Toast.LENGTH_SHORT).show();
+                    }
+
+                });
     }
 
 
@@ -252,61 +297,5 @@ public class LoginActivity extends LifecycleAppCompatActivity implements LoaderC
         int IS_PRIMARY = 1;
     }
 
-    /**
-     * Represents an asynchronous login/registration task used to authenticate
-     * the user.
-     */
-    public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
-
-        private final String mEmail;
-        private final String mPassword;
-
-        UserLoginTask(String email, String password) {
-            mEmail = email;
-            mPassword = password;
-        }
-
-        @Override
-        protected Boolean doInBackground(Void... params) {
-            // TODO: attempt authentication against a network service.
-
-            try {
-                // Simulate network access.
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                return false;
-            }
-
-            for (String credential : DUMMY_CREDENTIALS) {
-                String[] pieces = credential.split(":");
-                if (pieces[0].equals(mEmail)) {
-                    // Account exists, return true if the password matches.
-                    return pieces[1].equals(mPassword);
-                }
-            }
-
-            // TODO: register the new account here.
-            return true;
-        }
-
-        @Override
-        protected void onPostExecute(final Boolean success) {
-            mAuthTask = null;
-            showProgress(false);
-
-            if (success) {
-                finish();
-            } else {
-                mPasswordView.setError(getString(R.string.error_incorrect_password));
-                mPasswordView.requestFocus();
-            }
-        }
-
-        @Override
-        protected void onCancelled() {
-            mAuthTask = null;
-            showProgress(false);
-        }
-    }
 }
 
