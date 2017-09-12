@@ -3,8 +3,8 @@ package com.example.alek.mvvmexample;
 import android.app.Application;
 
 import com.example.alek.mvvmexample.di.AppModule;
-import com.example.alek.mvvmexample.di.DaggerWebComponent;
-import com.example.alek.mvvmexample.di.WebComponent;
+import com.example.alek.mvvmexample.di.DaggerAppComponent;
+import com.example.alek.mvvmexample.di.AppComponent;
 import com.example.alek.mvvmexample.di.WebModule;
 
 /**
@@ -13,18 +13,18 @@ import com.example.alek.mvvmexample.di.WebModule;
 
 public class App extends Application {
 
-    private WebComponent mWebComponent;
+    private AppComponent mWebComponent;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        mWebComponent = DaggerWebComponent.builder()
-                .appModule(new AppModule(this))
+        mWebComponent = DaggerAppComponent.builder()
+                .appModule(new AppModule(this,"kkk"))
                 .webModule(new WebModule("blablalbalbal"))
                 .build();
     }
 
-    public WebComponent getWebComponent() {
+    public AppComponent getAppComponent() {
         return mWebComponent;
     }
 }

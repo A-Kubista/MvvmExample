@@ -22,7 +22,14 @@ import retrofit2.Response;
 public class TutorialRepository {
         @Inject
         public IWebservice webservice;
-        // ...
+
+    @Inject
+    public TutorialRepository() {
+
+    }
+
+
+    // ...
         public LiveData<TutorialModel> getTutorial(int tutorialId) {
             // This is not an optimal implementation, we'll fix it below
             final MutableLiveData<TutorialModel> data = new MutableLiveData<>();

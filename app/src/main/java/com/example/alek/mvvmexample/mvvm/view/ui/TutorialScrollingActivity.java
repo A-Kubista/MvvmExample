@@ -12,7 +12,6 @@ import android.view.MenuItem;
 import com.example.alek.mvvmexample.App;
 import com.example.alek.mvvmexample.R;
 import com.example.alek.mvvmexample.mvvm.view.customviews.LifecycleAppCompatActivity;
-import com.example.alek.mvvmexample.mvvm.model.repository.TutorialRepository;
 import com.example.alek.mvvmexample.mvvm.viewmodel.TutorialViewModel;
 
 import javax.inject.Inject;
@@ -22,12 +21,10 @@ public class TutorialScrollingActivity extends LifecycleAppCompatActivity {
     @Inject
     public TutorialViewModel viewModel;
 
-    @Inject
-    TutorialRepository repo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        ((App)getApplicationContext()).getWebComponent().inject(this);
+        ((App)getApplicationContext()).getAppComponent().inject(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scrolling);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -43,7 +40,6 @@ public class TutorialScrollingActivity extends LifecycleAppCompatActivity {
         });
 
 //        repo.getTutorial(1);
-
 
         viewModel = ViewModelProviders.of(this).get(TutorialViewModel.class);
         viewModel.init(1);
