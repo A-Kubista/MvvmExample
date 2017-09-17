@@ -78,6 +78,8 @@ public class UserDetailFragment extends LifecycleFragment {
     public ImageView imageViewProfile;
     @BindView(R.id.fab_custom_large)
     public FloatingActionButton custom_fab_large;
+    @BindView(R.id.textViewName)
+    public TextView textViewName;
 
     private DatailedUserViewModel mViewModel;
     private Activity parent_activity;
@@ -114,6 +116,7 @@ public class UserDetailFragment extends LifecycleFragment {
             custom_fab_large.setVisibility(View.VISIBLE);
             loadProfileImage(userModel.getImg_url(),userModel.getFemale());
             loadImage(userModel.getBack_url(),imageViewBack,R.color.colorPrimaryDark);
+            textViewName.setText(userModel.getName());
             custom_fab_large.getDrawable().setAlpha(255);
         }else {
             custom_toolbar_large.setVisibility(View.GONE);
