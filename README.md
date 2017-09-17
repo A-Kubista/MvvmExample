@@ -1,5 +1,5 @@
 # TASK - present data stored with json
-img src="/screen.gif?raw=true"
+<img src="/screen.gif?raw=true">
 ![alt text](https://i.imgur.com/4WsyQat.png)
 ![alt text](https://i.imgur.com/OJ3kGgy.png)
 # BUILD
