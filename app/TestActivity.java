@@ -1,7 +1,7 @@
-import com.example.alek.mvvmexample.R;
-import com.example.alek.mvvmexample.BR;
+import com.example.alek.task.R;
+import com.example.alek.task.BR;
 import com.stfalcon.androidmvvmhelper.mvvm.activities.BindingActivity;
-import com.example.alek.mvvmexample.databinding.ActivityTestBinding;
+import com.example.alek.task.databinding.ActivityTestBinding;
 
 
 /**

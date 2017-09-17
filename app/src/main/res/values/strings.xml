@@ -104,4 +104,20 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="title_activity_user_selector">UserSelectorActivity</string>
+    <string name="title_user_list">Users</string>
+    <string name="title_user_detail">User Detail</string>
+    <string name="hobbies">Hobbies:</string>
+    <string name="fab_add_info">Mock of add action</string>
+    <string name="hobbies_no_items">No hobbies</string>
+    <string name="sex">Sex:</string>
+    <string name="email">Email:</string>
+    <string name="age">Age:</string>
+    <string name="sex_female">female</string>
+    <string name="sex_male">male</string>
+    <string name="email_success">Email sent successfufly!</string>
+    <string name="email_fail">Failed to send an email.</string>
+    <string name="no_mail">No valid email for user</string>
+    <string name="email_subject">Example Subject</string>
+    <string name="email_content">Example content, It is possible and easy to format Email text with HTML selectors.</string>
 </resources>

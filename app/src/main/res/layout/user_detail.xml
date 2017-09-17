@@ -1,0 +1,201 @@
+
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="8dp"
+    app:cardElevation="8dp"
+    >
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        app:behavior_overlapTop="25dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/custom_toolbar_large"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/imageViewBack"
+                    android:layout_width="0dp"
+                    android:layout_height="250dp"
+                    android:scaleType="centerCrop"
+                    android:visibility="visible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@color/colorPrimaryDark" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/imageViewProfile"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_marginBottom="32dp"
+                    android:layout_marginStart="32dp"
+                    android:scaleType="centerCrop"
+                    android:visibility="visible"
+                    app:civ_border_color="@color/colorPrimary"
+                    app:civ_border_width="0.5dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageViewBack"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:srcCompat="@drawable/female_icon" />
+
+            </android.support.constraint.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/textViewHobbies"
+                style="?android:attr/textAppearanceMedium"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/hobbies"
+                android:textIsSelectable="true"
+                app:layout_constraintBottom_toBottomOf="@+id/imageViewHobbies"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/imageViewHobbies"
+                app:layout_constraintTop_toTopOf="@+id/imageViewHobbies"
+                tools:context="com.example.alek.task.mvvm.view.ui.UserDetailFragment" />
+
+            <TextView
+                android:id="@+id/textViewSex"
+                style="?android:attr/textAppearanceMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/sex"
+                android:textIsSelectable="true"
+                app:layout_constraintBottom_toBottomOf="@+id/imageViewSex"
+                app:layout_constraintStart_toEndOf="@+id/imageViewSex"
+                app:layout_constraintTop_toTopOf="@+id/imageViewSex"
+                tools:context="com.example.alek.task.mvvm.view.ui.UserDetailFragment" />
+
+            <TextView
+                android:id="@+id/textViewEmail"
+                style="?android:attr/textAppearanceMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/email"
+                android:textIsSelectable="true"
+                app:layout_constraintBottom_toBottomOf="@+id/imageViewEmail"
+                app:layout_constraintStart_toEndOf="@+id/imageViewEmail"
+                app:layout_constraintTop_toTopOf="@+id/imageViewEmail"
+                app:layout_constraintVertical_bias="1.0"
+                tools:context="com.example.alek.task.mvvm.view.ui.UserDetailFragment" />
+
+            <TextView
+                android:id="@+id/textViewAge"
+                style="?android:attr/textAppearanceMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/age"
+                android:textIsSelectable="true"
+                app:layout_constraintBottom_toBottomOf="@+id/imageViewAge"
+                app:layout_constraintStart_toEndOf="@+id/imageViewAge"
+                app:layout_constraintTop_toTopOf="@+id/imageViewAge"
+                tools:context="com.example.alek.task.mvvm.view.ui.UserDetailFragment" />
+
+            <ImageView
+                android:id="@+id/imageViewAge"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:adjustViewBounds="true"
+                android:padding="5dp"
+                android:src="@drawable/age_icon"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/custom_toolbar_large" />
+
+            <ImageView
+                android:id="@+id/imageViewEmail"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="24dp"
+                android:adjustViewBounds="true"
+                android:padding="5dp"
+                android:src="@drawable/mail_icon"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageViewAge" />
+
+            <ImageView
+                android:id="@+id/imageViewSex"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:adjustViewBounds="true"
+                android:padding="5dp"
+                android:src="@drawable/female_icon"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageViewEmail" />
+
+            <ImageView
+                android:id="@+id/imageViewHobbies"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:adjustViewBounds="true"
+                android:padding="5dp"
+                android:src="@drawable/hobbies_icon"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageViewSex" />
+
+            <LinearLayout
+                android:id="@+id/hobbies_container"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/imageViewHobbies"
+                app:layout_constraintTop_toBottomOf="@+id/textViewHobbies">
+
+            </LinearLayout>
+
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab_custom_large"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintBottom_toBottomOf="@+id/custom_toolbar_large"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/custom_toolbar_large"
+                app:srcCompat="@android:drawable/stat_notify_chat" />
+
+        </android.support.constraint.ConstraintLayout>
+    </android.support.v4.widget.NestedScrollView>
+</android.support.v7.widget.CardView>

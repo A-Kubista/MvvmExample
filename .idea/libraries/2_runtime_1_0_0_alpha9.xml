@@ -6,7 +6,7 @@
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/android.arch.core/runtime/1.0.0-alpha9/c7864bf4ef1f90b1e6b29f4d96d3f184ab9dc305/runtime-1.0.0-alpha9-sources.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/android.arch.persistence.room/runtime/1.0.0-alpha9/c3bb7e83a0919ca608fe2f9953ebd41fb28b4251/runtime-1.0.0-alpha9-sources.jar!/" />
     </SOURCES>
   </library>
 </component>
